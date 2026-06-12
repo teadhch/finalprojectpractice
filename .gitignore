@@ -1,0 +1,94 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# 가상환경
+venv/
+.venv/
+env/
+ENV/
+
+# Python build / package
+build/
+dist/
+*.egg-info/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# FastAPI / logs
+# =========================
+*.log
+logs/
+
+# =========================
+# VS Code / IDE
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# AI model weights
+# =========================
+models/yolo/*.pt
+models/yolo/*.onnx
+models/yolo/*.engine
+weights/
+*.pt
+*.pth
+*.onnx
+
+# =========================
+# Data files
+# =========================
+data/CCTV/
+data/results/
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.jpg
+*.jpeg
+*.png
+
+# 단, 폴더 구조 유지용 파일은 허용
+!data/.gitkeep
+!data/CCTV/.gitkeep
+!data/results/.gitkeep
+
+# =========================
+# Frontend
+# =========================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.*
+
+# =========================
+# Database
+# =========================
+*.db
+*.sqlite
+*.sqlite3
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
