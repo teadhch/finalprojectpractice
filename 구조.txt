@@ -1,0 +1,97 @@
+taken/
+│
+├── backend/                        # Python + FastAPI + LangChain
+│   ├── main.py                     # FastAPI 앱 진입점
+│   ├── requirements.txt
+│   ├── .env                        # API 키, DB URL 등 환경변수
+│   │
+│   ├── api/                        # REST API 라우터
+│   │   ├── __init__.py
+│   │   ├── routes/
+│   │   │   ├── alert.py            # 안전안내문자 수신 엔드포인트
+│   │   │   ├── cctv.py             # CCTV 영상 업로드 / 스트림 엔드포인트
+│   │   │   └── result.py           # 매칭 결과 조회 엔드포인트
+│   │   └── schemas/
+│   │       ├── alert_schema.py     # 문자 입력 Pydantic 모델
+│   │       ├── person_schema.py    # 인상착의 구조체
+│   │       └── result_schema.py    # 결과 응답 모델
+│   │
+│   ├── core/                       # 핵심 비즈니스 로직
+│   │   ├── llm/
+│   │   │   ├── parser.py           # LLM으로 인상착의 파싱 (LangChain)
+│   │   │   ├── prompt_templates.py # 프롬프트 템플릿 모음
+│   │   │   └── chain.py            # LangChain 체인 / 에이전트 정의
+│   │   │
+│   │   ├── vision/
+│   │   │   ├── frame_extractor.py  # 영상 → 프레임 추출 (OpenCV)
+│   │   │   ├── person_detector.py  # 인물 감지 (YOLO 등)
+│   │   │   ├── feature_extractor.py# 외형 특징 벡터 추출
+│   │   │   └── matcher.py          # 인상착의 ↔ 영상 유사도 계산
+│   │   │
+│   │   └── pipeline.py             # 전체 탐지 파이프라인 조율
+│   │
+│   ├── db/                         # 데이터베이스
+│   │   ├── models.py               # SQLAlchemy ORM 모델
+│   │   ├── database.py             # DB 연결 설정
+│   │   └── crud.py                 # CRUD 함수
+│   │
+│   ├── services/                   # 외부 서비스 연동
+│   │   ├── cctv_reader.py           # 영상파일 스캔 로직
+│   │   ├── sms_receiver.py         # 안전안내문자 수신 처리
+│   │   └── storage.py              # 영상 파일 저장 (로컬 / S3)
+│   │
+│   └── utils/
+│       ├── logger.py
+│       └── config.py               # 환경변수 로딩
+│
+├── frontend/                       # React
+│   ├── public/
+│   │   └── geodata/                     # ← 새로 추가
+│   │       ├── korea.geojson            # 시/도 경계 (17개)
+│   │       ├── sido/
+│   │       │   ├── 11.geojson           # 서울특별시 → 구 경계
+│   │       │   ├── 26.geojson           # 부산광역시
+│   │       │   └── ...                  # 17개 시도
+│   │       └── sigungu/
+│   │           ├── 1100.geojson         # 서울 → 동 경계
+│   │           ├── 2600.geojson         # 부산 → 동 경계
+│   │           └── ...
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Dashboard.jsx       # 메인 대시보드
+│   │   │   ├── AlertInput.jsx      # 문자 수동 입력 페이지
+│   │   │   ├── CCTVUpload.jsx      # 영상 업로드 페이지
+│   │   │   └── ResultView.jsx      # 탐지 결과 페이지
+│   │   │
+│   │   ├── components/
+│   │   │   ├── MapDrilldown.jsx    # 핵심 컴포넌트 (지도)
+│   │   │   ├── PersonCard.jsx      # 인상착의 카드
+│   │   │   ├── MatchResult.jsx     # 매칭 결과 + 정확도 표시
+│   │   │   ├── VideoPlayer.jsx     # 탐지된 영상 구간 재생
+│   │   │   └── ConfidenceBar.jsx   # 정확도 시각화 바
+│   │   ├── hooks/
+│   │   │   └── useMapDrilldown.js  # 드릴다운 상태 관리 (지도)
+│   │   │
+│   │   ├── api/
+│   │   │   └── client.js           # Axios 기반 API 클라이언트
+│   │   │
+│   │   └── store/
+│   │       └── useDetectionStore.js# Zustand 상태 관리
+│   │
+│   └── package.json
+│
+├── models/                         # AI 모델 가중치
+│   └── yolo/                       # 인물 감지 모델
+│
+├── data/                           # 임시 데이터
+│   ├── CCTV/
+│   │   └── {행정동코드}/
+│   │       └── YYYY/MM/DD/
+│   │           └── CAM001_20241225_080000.mp4
+│   └── results/                    # 탐지 결과 저장
+│
+├── docker-compose.yml
+└── README.md
