@@ -1,7 +1,9 @@
 import os
 import cv2
-
+from pathlib import Path
 cap = cv2.VideoCapture('data/CCTV/lo_e1281_c1.mp4')
+video_path = Path("data/CCTV/lo_e1281_c1.mp4")
+video_name = video_path.stem
 
 if not cap.isOpened():
     print("오류: 영상을 열지 못했습니다.")
@@ -32,7 +34,7 @@ for idx, pos in enumerate(positions, 1):
 
     if ret:
         seconds = int(pos / fps)
-        save_path = os.path.join(save_dir, f"frame_{seconds:05d}s.jpg")
+        save_path = os.path.join(save_dir, f"{video_name}_frame_{seconds:05d}s.jpg")
         success = cv2.imwrite(save_path, frame)
 
         if success:
