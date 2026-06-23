@@ -10,13 +10,12 @@ image = Image.open(
 ).convert("RGB")
 
 texts = [
-    # "gray shorts, white shirt",
-    # "red hat, blue skirt, green shirt",
-    # "white shirt, black shorts",
-    # "white shirt, gray shorts, green hat, white shoes",
-    # "white shirt",
+    "gray shorts, white shirt",
+    "red hat, blue skirt, green shirt",
+    "white shirt, black shorts",
+    "white shirt, gray shorts, green hat, white shoes",
+    "white shirt",
     "black shirt"
-
 ]
 
 inputs = processor(
